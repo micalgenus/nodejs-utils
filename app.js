@@ -50,7 +50,7 @@ const executeDockerCommend = async (req, res) => {
       resolve();
     })
   )
-    .then(() => res.status(200).end())
+    .then(() => res.status(200).send("success"))
     .catch(() => res.status(500).end());
 };
 
