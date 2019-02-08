@@ -55,7 +55,7 @@ const executeDockerCommend = async (req, res) => {
 };
 
 /* Post Webhook Event */
-app.get("/:token", checkPermission, executeDockerCommend);
+app.post("/:token", checkPermission, executeDockerCommend);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
