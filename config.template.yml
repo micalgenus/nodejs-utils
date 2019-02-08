@@ -1,0 +1,17 @@
+token: please-enter-secret-for-login
+
+docker:
+  organization1:
+    - repository1:
+        - tag1: |
+            command1
+            command2
+        - tag2: systemctl restart docker-service
+  organization2:
+    - repository1:
+        - tag1: command1
+    - repository2:
+        - tag1: |
+            docker rm -f container
+            docker pull organization2/repository2:tag1
+            docker run --name container -p 8080:8080 organization2/repository2:tag1
