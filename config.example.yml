@@ -1,0 +1,12 @@
+token: please-enter-secret-for-login
+
+docker:
+  org1:
+    - repo1:
+      - tag1: |
+        # Command
+    - repo2:
+      - tag1: |
+        # Command
+  org2:
+  # ...
