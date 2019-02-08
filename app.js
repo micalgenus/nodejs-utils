@@ -6,6 +6,7 @@ const yaml = require("yaml");
 const fs = require("fs");
 const { token, docker } = yaml.parse(fs.readFileSync("./config.yml", "utf8"));
 const exec = require("child_process").exec;
+const rp = require("request-promise");
 
 if (!(token && docker)) {
   console.error("Please create 'token' and 'docker' in config.yml");
@@ -50,7 +51,14 @@ const executeDockerCommend = async (req, res) => {
       resolve();
     })
   )
-    .then(() => res.status(200).send("success"))
+    .then(() =>
+      rp({
+        method: "POST",
+        uri: req.body.callback_url,
+        body: { state: "success" },
+        json: true
+      }).then(res.status(200).send("success"))
+    )
     .catch(() => res.status(500).end());
 };
 
