@@ -7,7 +7,7 @@ $ openssl rand -hex 20 # For token
 $ yarn && yarn start
 ```
 
-URL: `http://domain:3000/token`
+URL: `http://domain:3000/:token`
 
 ### Configuration: `config.yml`
 ```
