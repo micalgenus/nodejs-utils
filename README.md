@@ -34,3 +34,4 @@ docker:
 - [ ] Support regex for organization, repository and tag name [#1](https://github.com/micalgenus/docker-webhook-node/issues/1)
 - [ ] Support HTTPS with [let's encrypt](https://letsencrypt.org/) certificate [#2](https://github.com/micalgenus/docker-webhook-node/issues/2)
 - [ ] Test using travis-ci
+- [ ] Wrapping docker image with dockerfile
