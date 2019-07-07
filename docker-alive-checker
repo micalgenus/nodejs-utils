@@ -4,16 +4,16 @@ const { exec } = require('child_process');
 
 const GET_SERVICES_CMD = 'docker service ls';
 
-const execAsync = (cmd) => {
+const execAsync = cmd => {
   return new Promise((resolve, reject) => {
     return exec(cmd, (err, stdout, stderr) => {
       if (err) return reject(stderr);
       return resolve(stdout);
     });
   });
-}
+};
 
-exec(GET_SERVICES_CMD, async(err, stdout, stderr) => {
+exec(GET_SERVICES_CMD, async (err, stdout, stderr) => {
   if (err) return;
   const services = stdout.split('\n');
   for (let i = 1; i < services.length; i++) {
@@ -25,6 +25,11 @@ exec(GET_SERVICES_CMD, async(err, stdout, stderr) => {
     const [alive, available] = replicas.split('/').map(v => parseInt(v, 10));
     if (alive >= available) continue;
 
-    const result = await execAsync(`docker service update --image=${image} ${name}`);
-  } 
+    if (alive > 0) {
+      await execAsync(`docker service scale ${name}=${alive}`);
+      await execAsync(`docker service scale ${name}=${available}`);
+    } else {
+      await execAsync(`docker service update --image=${image} ${name}`);
+    }
+  }
 });
